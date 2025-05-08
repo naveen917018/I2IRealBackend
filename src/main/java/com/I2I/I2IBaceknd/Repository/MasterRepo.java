@@ -23,6 +23,41 @@ public class MasterRepo extends dao {
         return this.executeQuery(sql, new HashMap<>());
     }
 
+
+
+    public Map<String, Object> saveMasterStatus(Map<String, Object> param) {
+        String sql = "";
+    
+        if (param.get("status_id") == null) {
+            System.out.println("Inserting new status...");
+    
+            sql += "INSERT INTO status_master (";
+            sql += "status_code, status_name, created_at";
+            sql += ") VALUES (";
+            sql += ":status_code, :status_name, now()";
+            sql += ");";
+    
+        } else {
+            System.out.println("Updating existing status...");
+    
+            sql += "UPDATE status_master SET ";
+            sql += "status_code = :status_code, ";
+            sql += "status_name = :status_name, ";
+            sql += "updated_at = now() ";
+            sql += "WHERE status_id = :status_id;";
+        }
+    
+        Long id = this.Save(sql, param, "status_id");
+    
+        Map<String, Object> result = new HashMap<>();
+        result.put("status_id", id);
+        result.put("message", param.get("status_id") == null
+            ? "New Status Registered"
+            : "Status updated successfully");
+    
+        return result;
+    }
+    
   
 
     

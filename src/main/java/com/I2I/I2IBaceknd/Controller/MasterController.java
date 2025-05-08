@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +28,12 @@ public class MasterController {
     private List<Map<String,Object>>get_master_stages_by_id(@RequestParam Integer status_id){
         return masterService.get_master_stages_by_id(status_id);
     }
+
+
+    @PostMapping({"api/v0/save_master_status", "api/v1/save_master_status"})
+    public Map<String, Object> saveMasterStatus(@RequestBody Map<String, Object> request) {
+        return masterService.saveMasterStatus(request);
+    }
+
 
 }

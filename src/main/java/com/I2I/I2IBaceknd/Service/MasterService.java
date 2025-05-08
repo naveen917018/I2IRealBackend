@@ -22,5 +22,9 @@ public class MasterService {
     public List<Map<String, Object>> get_master_stages_by_id(Integer status_id) {
         return masterRepo.getStatusById(status_id);
     }
+
+    public Map<String, Object> saveMasterStatus(Map<String,Object> request) {
+            return masterRepo.saveMasterStatus(request);
+    }
     
 }
